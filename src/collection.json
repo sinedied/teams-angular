@@ -4,7 +4,7 @@
     "teams-app": {
       "description": "Creates a new Teams application.",
       "factory": "./teams-app/index#teamsApp",
-      "save": false
+      "schema": "./teams-app/schema.json"
     }
   }
 }

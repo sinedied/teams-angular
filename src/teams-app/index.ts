@@ -1,5 +1,5 @@
 import { join, normalize, Path, strings } from '@angular-devkit/core';
-import { apply, chain, MergeStrategy, mergeWith, Rule, SchematicContext, SchematicsException, template, Tree, url } from '@angular-devkit/schematics';
+import { apply, chain, externalSchematic, MergeStrategy, mergeWith, Rule, SchematicContext, SchematicsException, template, Tree, url } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 
 export function teamsApp(options: any): Rule {
@@ -7,7 +7,7 @@ export function teamsApp(options: any): Rule {
     const projectRoot = await getProjectRoot(tree, options);
     options.path = join(projectRoot, 'src');
 
-    return chain([applyTemplate(options)]);
+    return chain([generateNewApp(options), applyTemplate(options)]);
   };
 }
 
@@ -23,6 +23,20 @@ function applyTemplate(options: any): Rule {
     );
 
     return generateTemplateRule;
+  }
+}
+
+function generateNewApp(options: any): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    return externalSchematic('@schematics/angular', 'ng-new', {
+      name: options.name,
+      version: '13.1.2',
+      directory: options.name,
+      routing: false,
+      style: 'scss',
+      inlineStyle: true,
+      inlineTemplate: true
+    });
   }
 }
 
