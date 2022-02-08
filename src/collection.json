@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "teams-app": {
+      "description": "Creates a new Teams application.",
+      "factory": "./teams-app/index#teamsApp",
+      "save": false
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "teams-app",
+  "version": "0.0.0",
+  "description": "An Angular schematics collection to create a new Teams application.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "clean": "npx rimraf lib",
+    "test": "npm run build && jasmine src/**/*.spec.js"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./lib/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^13.1.2",
+    "@angular-devkit/schematics": "^13.1.2",
+    "@schematics/angular": "^13.2.2"
+  },
+  "devDependencies": {
+    "@types/jasmine": "~3.10.0",
+    "@types/node": "^12.11.1",
+    "jasmine": "^3.5.0",
+    "typescript": "~4.5.2"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ]
+}
