@@ -1,6 +1,5 @@
-import { join, strings } from '@angular-devkit/core';
-import { apply, chain, externalSchematic, MergeStrategy, mergeWith, Rule, SchematicContext, SchematicsException, template, Tree, url } from '@angular-devkit/schematics';
-import { addPackages, mergeWithPackageJson } from '../common';
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { addPackages, copyTemplate, mergeWithPackageJson } from '../common';
 import { SchemaOptions } from './schema';
 
 export function teamsApp(options: SchemaOptions): Rule {
@@ -10,7 +9,7 @@ export function teamsApp(options: SchemaOptions): Rule {
 
     return chain([
       generateNewApp(options),
-      applyTemplate(options),
+      copyTemplate(options),
       addPackages(options, {
         'dependencies': {
           // '@azure/msal-angular': '^2.1.0',
@@ -32,26 +31,11 @@ export function teamsApp(options: SchemaOptions): Rule {
   };
 }
 
-function applyTemplate(options: SchemaOptions): Rule {
-  return (tree: Tree, _context: SchematicContext) => {
-    const templateSource = apply(
-      url('files'),
-      [template({ ...options, ...strings })]
-    );
-    const generateTemplateRule = mergeWith(
-      templateSource,
-      MergeStrategy.Overwrite
-    );
-
-    return generateTemplateRule;
-  }
-}
-
 function generateNewApp(options: SchemaOptions): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     return externalSchematic('@schematics/angular', 'ng-new', {
       name: options.name,
-      version: '13.0.0',
+      version: '13.2.2',
       directory: options.name,
       routing: false,
       style: 'scss',
@@ -60,5 +44,3 @@ function generateNewApp(options: SchemaOptions): Rule {
     });
   }
 }
-
-
