@@ -1,3 +1,3 @@
-export * from './workspace.js';
-export * from './package.js';
-export * from './util.js';
+export * from './workspace';
+export * from './package';
+export * from './util';
