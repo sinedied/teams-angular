@@ -1,28 +1,15 @@
-# Getting Started With Schematics
+# @teams/angular
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+> An Angular schematics collection to create Microsoft Teams applications.
 
-### Testing
+⚠️ WIP ⚠️
+ 
+## Usage
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
+## Schematics
 
-Check the documentation with
+## Contributing
 
-```bash
-schematics --help
-```
-
-### Unit Testing
+To test locally, run `npm test:schematics`. This will act the same as the `generate` command of the Angular CLI, but using a debug mode.
 
 `npm run test` will run the unit tests, using Jasmine as a runner and test framework.
-
-### Publishing
-
-To publish, simply do:
-
-```bash
-npm run build
-npm publish
-```
-
-That's it!
