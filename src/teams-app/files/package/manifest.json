@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.12",
+  "id": "933b8170-ad4c-421f-b2ca-a80f2685ef08",
+  "packageName": "com.package.<%= dasherize(name) %>",
+  "name": {
+    "short": "Angular Teams app",
+    "full": ""
+  },
+  "developer": {
+    "name": "Contoso",
+    "mpnId": "",
+    "websiteUrl": "https://localhost:4200",
+    "privacyUrl": "https://localhost:4200/privacy",
+    "termsOfUseUrl": "https://localhost:4200/termsofuse"
+  },
+  "description": {
+    "short": "Teams app built with Angular",
+    "full": "Teams app built with Angular"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "a4a61f46-8fa1-48fc-8e3d-6023a7bc068b",
+      "name": "Angular app",
+      "contentUrl": "https://244e-2001-1c00-80c-d00-e5da-977c-7c52-5193.ngrok.io",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [],
+  "webApplicationInfo": {
+    "id": "ff254847-12c7-44cf-921e-8883dbd622a7",
+    "resource": "api://244e-2001-1c00-80c-d00-e5da-977c-7c52-5193.ngrok.io/ff254847-12c7-44cf-921e-8883dbd622a7"
+  }
+}
