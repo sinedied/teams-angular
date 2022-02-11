@@ -1,0 +1,79 @@
+{
+  "id": "95cfe30d-ed44-4f9d-b73d-c66560f72e83",
+  "acceptMappedClaims": null,
+  "accessTokenAcceptedVersion": null,
+  "addIns": [],
+  "allowPublicClient": null,
+  "appId": "07169315-ee45-4006-835d-479d13bd0061",
+  "appRoles": [],
+  "oauth2AllowUrlPathMatching": false,
+  "createdDateTime": "2022-02-07T08:51:18Z",
+  "description": null,
+  "certification": null,
+  "disabledByMicrosoftStatus": null,
+  "groupMembershipClaims": null,
+  "identifierUris": [
+    "api://myuniquedomain.loca.lt/07169315-ee45-4006-835d-479d13bd0061"
+  ],
+  "informationalUrls": {
+    "termsOfService": null,
+    "support": null,
+    "privacy": null,
+    "marketing": null
+  },
+  "keyCredentials": [],
+  "knownClientApplications": [],
+  "logoUrl": null,
+  "logoutUrl": null,
+  "name": "Angular Teams app",
+  "notes": null,
+  "oauth2AllowIdTokenImplicitFlow": false,
+  "oauth2AllowImplicitFlow": false,
+  "oauth2Permissions": [
+    {
+      "adminConsentDescription": "Access as a user",
+      "adminConsentDisplayName": "Access as a user",
+      "id": "cf38eb5b-8fcd-4697-9bd5-d80b7f98dfc5",
+      "isEnabled": true,
+      "userConsentDescription": null,
+      "userConsentDisplayName": null,
+      "value": "access_as_user"
+    }
+  ],
+  "oauth2RequirePostResponse": false,
+  "optionalClaims": null,
+  "orgRestrictions": [],
+  "parentalControlSettings": {
+    "countriesBlockedForMinors": [],
+    "legalAgeGroupRule": "Allow"
+  },
+  "passwordCredentials": [],
+  "publisherDomain": "M365x61791022.onmicrosoft.com",
+  "replyUrlsWithType": [
+    {
+      "url": "http://localhost/auth",
+      "type": "Spa"
+    },
+    {
+      "url": "https://myuniquedomain.loca.lt/auth",
+      "type": "Spa"
+    }
+  ],
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "00000003-0000-0000-c000-000000000000",
+      "resourceAccess": [
+        {
+          "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+          "type": "Scope"
+        }
+      ]
+    }
+  ],
+  "samlMetadataUrl": null,
+  "serviceManagementReference": null,
+  "signInUrl": null,
+  "signInAudience": "AzureADMyOrg",
+  "tags": [],
+  "tokenEncryptionKeyId": null
+}
