@@ -22,7 +22,7 @@ export function teamsApp(options: SchemaOptions): Rule {
       mergeWithPackageJson(options, {
         'scripts': {
           'm365:login': 'm365 login',
-          'm365:create-aa-app': 'm365 aad app add --manifest @aad-app-manifest.json --save',
+          'm365:create-aad-app': 'm365 aad app add --manifest @aad-app-manifest.json --save',
           'm365:package': 'cd package && npx bestzip ../angular-teams.zip *',
           'm365:publish': 'npm run m365:package -s && m365 teams app publish -p angular-teams.zip',
         }
