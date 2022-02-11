@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "An Angular schematics collection to create Microsoft Teams applications.",
   "scripts": {
-    "build": "npm run -s build:copy && tsc -p tsconfig.json",
+    "build": "npm run clean -s && npm run -s build:copy && tsc -p tsconfig.json",
     "build:watch": "npm run -s build:copy && tsc -p tsconfig.json --watch",
     "build:copy": "copyfiles -u 1 src/**/files/**/* lib/",
     "clean": "rimraf lib",
