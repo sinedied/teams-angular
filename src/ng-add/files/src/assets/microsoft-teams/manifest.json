@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.12",
+  "id": "<%= id %>",
+  "packageName": "com.package.name",
+  "name": {
+    "short": "Angular Teams app",
+    "full": ""
+  },
+  "developer": {
+    "name": "Contoso",
+    "mpnId": "",
+    "websiteUrl": "https://localhost:<%= port %>",
+    "privacyUrl": "https://localhost:<%= port %>/privacy",
+    "termsOfUseUrl": "https://localhost:<%= port %>/termsofuse"
+  },
+  "description": {
+    "short": "Teams app built with Angular",
+    "full": "Teams app built with Angular"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "<%= entityId %>",
+      "name": "Angular app",
+      "contentUrl": "https://localhost:<%= port %>",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [],
+  "webApplicationInfo": {}
+}
