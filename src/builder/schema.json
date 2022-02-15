@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "appId": {
+      "$comment": "ID of the Teams app as defined in the app's manifest id property",
+      "type": "string"
+    },
+    "packageFileName": {
+      "$comment": "Name of the package file to create",
+      "type": "string"
+    }
+  }
+}

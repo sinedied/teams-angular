@@ -21,10 +21,14 @@
   ],
   "license": "MIT",
   "schematics": "./lib/collection.json",
+  "builders": "./lib/builders.json",
   "dependencies": {
+    "@angular-devkit/architect": "^0.1302.3",
     "@angular-devkit/core": "^13.1.2",
     "@angular-devkit/schematics": "^13.1.2",
-    "@schematics/angular": "^13.2.2"
+    "@pnp/cli-microsoft365": "^5.0.0-beta.d107c7a",
+    "@schematics/angular": "^13.2.2",
+    "bestzip": "^2.2.0"
   },
   "devDependencies": {
     "@angular-devkit/schematics-cli": "^13.2.2",
