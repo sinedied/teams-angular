@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "description": "An Angular schematics collection to create Microsoft Teams applications.",
   "scripts": {
-    "build": "npm run clean -s && npm run -s build:copy && tsc -p tsconfig.json",
-    "build:watch": "npm run -s build:copy && tsc -p tsconfig.json --watch",
-    "build:copy": "copyfiles -u 1 src/**/files/**/* lib/",
+    "prebuild": "npm run clean",
+    "build": "tsc -p tsconfig.json",
+    "postbuild": "npm run copy:teams-app && npm run copy:ng-add",
+    "copy:teams-app": "copyfiles -u 2 \"src/teams-app/files/**\" \"lib/teams-app\"",
+    "copy:ng-add": "copyfiles -u 2 \"src/ng-add/files/**\" \"lib/ng-add\" -a",
+    "build:watch": "npm run -s postbuild && tsc -p tsconfig.json --watch",
     "clean": "rimraf lib",
     "test": "jest src/**/*.spec.ts",
     "test:schematics": "schematics .:teams-app test"
