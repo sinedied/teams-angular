@@ -4,7 +4,6 @@ import {
   chain,
   mergeWith,
   move,
-  noop,
   Rule,
   SchematicContext,
   SchematicsException,
@@ -19,45 +18,8 @@ import {
 } from "@schematics/angular/utility/dependencies";
 import { getWorkspace } from "@schematics/angular/utility/workspace";
 import { randomUUID } from "crypto";
-import { readdirSync } from "fs";
 import { EOL } from "os";
-import path, { normalize, posix } from "path";
-
-// TODO (@manekinekko): test this!
-function moveDeep(from: string, to?: string): Rule {
-  const traverseFolder = function* traverseFolder(
-    folder: string
-  ): Generator<string> {
-    const folders = readdirSync(folder, { withFileTypes: true });
-    for (const folderEntry of folders) {
-      const entryPath = path.resolve(folder, folderEntry.name);
-      if (folderEntry.isDirectory()) {
-        yield* traverseFolder(entryPath);
-      } else {
-        yield entryPath;
-      }
-    }
-  };
-
-  if (to === undefined) {
-    to = from;
-    from = "/";
-  }
-
-  const fromPath = normalize("/" + from);
-  const toPath = normalize("/" + to);
-
-  if (fromPath === toPath) {
-    return noop;
-  }
-
-  return (tree: Tree) => {
-    for (const file of traverseFolder(from)) {
-      const relativePath = file.replace(fromPath, toPath);
-      tree.rename(file, relativePath);
-    }
-  };
-}
+import { posix } from "path";
 
 function addDependency(
   name: string,
@@ -74,7 +36,7 @@ function addDependency(
 
 function addNpmDependencies() {
   return (tree: Tree, context: SchematicContext) => {
-    // TODO (@manekinekko): ask user if they need @microsoft/teams-j to be installed
+    // TODO (@manekinekko): ask user if they need @microsoft/teams-js to be installed
     addPackageJsonDependency(
       tree,
       addDependency("@microsoft/teams-js", "^1.11.0")
@@ -96,7 +58,7 @@ function addNpmDependencies() {
       addDependency("localtunnel", "^2.0.2", NodeDependencyType.Dev)
     );
 
-    context.addTask(new NodePackageInstallTask(), []);
+    context.addTask(new NodePackageInstallTask());
 
     return tree;
   };
@@ -122,23 +84,26 @@ function updateGitIgnore() {
 }
 
 function copyFiles(projectPath: string) {
-  return async (tree: Tree) => {
+  return (tree: Tree) => {
     const manifestFilepath = posix.join(
       "src",
       "assets",
       "microsoft-teams",
       "manifest.json"
     );
+
     if (tree.exists(manifestFilepath)) {
       // TODO (@manekinekko): ask user if they want to overwrite the manifest.json
       throw new SchematicsException(
-        `Found an existing Microsoft Teams manifest in the project at "${manifestFilepath}".`
+        `Found an existing Microsoft Teams manifest in the project at "${manifestFilepath}".\n` +
+          `Are you sure you want to install Microsoft Teams in this project?\n` +
+          `If you are sure, you can remove the existing file and re-run this command.`
       );
     }
 
     return mergeWith(
       apply(url("./files"), [
-        move(normalize(projectPath)),
+        move(projectPath),
         template({
           // TODO (@manekinekko): figure out port resolution logic
           port: 4200,
@@ -173,7 +138,7 @@ function addScriptToPackageJSON() {
   };
 }
 
-async function getHostProjectDefinition(
+async function getHostProject(
   tree: Tree
 ): Promise<[string, ProjectDefinition]> {
   const workspace = await getWorkspace(tree);
@@ -200,18 +165,16 @@ async function getHostProjectDefinition(
 
 export default function (_options: any): Rule {
   return async (tree: Tree) => {
-    const [_projectName, projectDefinition] = await getHostProjectDefinition(
-      tree
-    );
+    const [_projectName, hostProject] = await getHostProject(tree);
 
     let targetPath =
-      projectDefinition.sourceRoot ?? posix.join(projectDefinition.root, "src");
+      hostProject.sourceRoot ?? posix.join(hostProject.root, "src");
 
     return chain([
-      addNpmDependencies,
       addScriptToPackageJSON(),
+      addNpmDependencies(),
       copyFiles(targetPath),
-      updateGitIgnore,
+      updateGitIgnore(),
     ]);
   };
 }
