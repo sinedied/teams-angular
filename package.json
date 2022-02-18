@@ -28,12 +28,10 @@
   "dependencies": {
     "@angular-devkit/architect": "^0.1302.3",
     "@angular-devkit/core": "^13.1.2",
-    "@angular-devkit/schematics": "^13.1.2",
-    "@pnp/cli-microsoft365": "^5.0.0-beta.d107c7a",
+    "@angular-devkit/schematics": "^13.2.3",
+    "@pnp/cli-microsoft365": "^5.0.0-beta.30c8613",
     "@schematics/angular": "^13.2.2",
     "bestzip": "^2.2.0"
-    "@angular-devkit/schematics": "^13.2.3",
-    "@schematics/angular": "^13.2.2"
   },
   "devDependencies": {
     "@angular-devkit/schematics-cli": "^13.2.2",
