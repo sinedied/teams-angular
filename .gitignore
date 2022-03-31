@@ -10,6 +10,7 @@ jsconfig.json
 # Misc
 node_modules/
 test/
+ng-test/
 npm-debug.log*
 yarn-error.log*
 TODO
