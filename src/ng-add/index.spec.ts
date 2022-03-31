@@ -4,11 +4,11 @@ import * as path from 'path';
 
 const collectionPath = path.join(__dirname, '../collection.json');
 
-describe('teams-app', () => {
+describe('ng-add', () => {
   it('works', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
     const tree = await runner
-      .runSchematicAsync('teams-app', { name: 'test' }, Tree.empty())
+      .runSchematicAsync('ng-add', { name: 'test' }, Tree.empty())
       .toPromise();
 
     expect(tree.files).toMatchInlineSnapshot(`

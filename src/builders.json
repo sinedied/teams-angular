@@ -1,9 +1,0 @@
-{
-  "builders": {
-    "deploy-to-teams": {
-      "implementation": "./builder/deployToTeams.js",
-      "schema": "./builder/schema.json",
-      "description": "Creates a Microsoft Teams package and deploys it to Teams."
-    }
-  }
-}

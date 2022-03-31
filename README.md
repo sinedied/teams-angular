@@ -1,62 +1,24 @@
-# @teams/angular
+# teams-schematics
 
-> An Angular schematics collection to create Microsoft Teams applications.
+An Angular schematic to create Microsoft Teams applications.
 
-⚠️ WIP ⚠️
- 
 ## Usage
 
 ## Schematics
 
-### Builder
+### `ng new teams-angular`
 
-This schematics contains a builder that simplifies building and deploying the Teams app built using Angular to Microsoft Teams. To use the builder, in the `angular.json` file in your project add a new target named `deploy-to-teams`:
+This package provides a schematic that creates a new Angular app configured to be deployed as a Microsoft Teams app. The generated app includes:
 
-```json
-{
-  "my-app": {
-    "architect": {
-      "deploy-to-teams": {
-        "builder": "@teams/angular:deploy-to-teams",
-        "options": {
-          "appId": "933b8170-ad4c-421f-b2ca-a80f2685ef08",
-          "packageFileName": "angular-teams.zip"
-        }
-      }
-    }
-  }
-}
-```
+- authentication configuration using Microsoft Identity Platform,
+- Single-Sign On (SSO) configuration with Microsoft Teams,
+- additional npm scripts to create Azure AD application and manage the Teams app package
 
-The `deploy-to-teams` target expects two options:
-
-- `appId` - the value of the `id` property from the Teams app manifest
-- `packageFileName` - the name of the .zip file that should be used to create the Teams app package
-
-To run the builder execute:
+To use this schematic, run:
 
 ```sh
-ng run my-app:deploy-to-teams
+ng new teams-angular --collection teams-schematics
 ```
-
-After executing, the builder will create a Teams app package, publish it to Microsoft Teams and install it for the current user. The last two steps are done using CLI for Microsoft 365 and the builder assumes that you're already signed in with your Microsoft 365 account. If you haven't signed in previously, you can do it by running in command line `m365 login` and following the instructions on the screen.
-
-### `ng add @teams/angular`
-
-This package provides a schematic that adds Microsoft Teams manifest support to an existing Angular project.
-
-To add this schematic to an existing Angular project, run:
-
-```
-ng add @teams/angular
-```
-
-Once installed, this schematic will add the following files to `src/assets/microsoft-teams/`:
-- color.png
-- outline.png
-- manifest.json
-
-It will also install the necessary npm dependencies in the host project.
 
 ## Contributing
 
