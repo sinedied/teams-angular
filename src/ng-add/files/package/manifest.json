@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "version": "1.0.0",
   "manifestVersion": "1.12",
-  "id": "933b8170-ad4c-421f-b2ca-a80f2685ef08",
-  "packageName": "com.package.<%= dasherize(name) %>",
+  "id": "<%= id %>",
+  "packageName": "com.package.name",
   "name": {
     "short": "Angular Teams app",
     "full": ""
@@ -26,9 +26,9 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "entityId": "a4a61f46-8fa1-48fc-8e3d-6023a7bc068b",
+      "entityId": "<%= entityId %>",
       "name": "Angular app",
-      "contentUrl": "https://244e-2001-1c00-80c-d00-e5da-977c-7c52-5193.ngrok.io",
+      "contentUrl": "https://myuniquedomain.loca.lt",
       "scopes": [
         "personal"
       ]
@@ -42,7 +42,7 @@
   ],
   "validDomains": [],
   "webApplicationInfo": {
-    "id": "ff254847-12c7-44cf-921e-8883dbd622a7",
-    "resource": "api://244e-2001-1c00-80c-d00-e5da-977c-7c52-5193.ngrok.io/ff254847-12c7-44cf-921e-8883dbd622a7"
+    "id": "fc51be1e-1870-4300-a6e6-e853c57577b4",
+    "resource": "api://myuniquedomain.loca.lt/fc51be1e-1870-4300-a6e6-e853c57577b4"
   }
 }

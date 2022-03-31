@@ -1,17 +1,19 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "MicrosoftTeamsSchematicAdd",
-    "title": "Schematic to add Microsoft Teams e2e testing support",
-    "type": "object",
-    "description": "A schematic that adds Microsoft Teams support to an existing Angular project.",
-    "additionalProperties": false,
-    "properties": {
-      "project": {
-        "type": "string",
-        "$default": {
-          "$source": "argv",
-          "index": 0
-        }
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ng-add",
+  "title": "Teams application schematics",
+  "description": "Initializes a new Teams application",
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the project",
+      "x-prompt": " What name would you like to use for your project?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
       }
-    }
+    } 
   }
+}

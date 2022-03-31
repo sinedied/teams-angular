@@ -4,7 +4,7 @@
   "accessTokenAcceptedVersion": null,
   "addIns": [],
   "allowPublicClient": null,
-  "appId": "07169315-ee45-4006-835d-479d13bd0061",
+  "appId": "fc51be1e-1870-4300-a6e6-e853c57577b4",
   "appRoles": [],
   "oauth2AllowUrlPathMatching": false,
   "createdDateTime": "2022-02-07T08:51:18Z",
@@ -13,7 +13,7 @@
   "disabledByMicrosoftStatus": null,
   "groupMembershipClaims": null,
   "identifierUris": [
-    "api://myuniquedomain.loca.lt/07169315-ee45-4006-835d-479d13bd0061"
+    "api://myuniquedomain.loca.lt/fc51be1e-1870-4300-a6e6-e853c57577b4"
   ],
   "informationalUrls": {
     "termsOfService": null,
@@ -48,6 +48,20 @@
     "legalAgeGroupRule": "Allow"
   },
   "passwordCredentials": [],
+  "preAuthorizedApplications": [
+    {
+      "appId": "5e3ce6c0-2b1f-4285-8d4b-75ee78787346",
+      "permissionIds": [
+        "cf38eb5b-8fcd-4697-9bd5-d80b7f98dfc5"
+      ]
+    },
+    {
+      "appId": "1fec8e78-bce4-4aaf-ab1b-5451cc387264",
+      "permissionIds": [
+        "cf38eb5b-8fcd-4697-9bd5-d80b7f98dfc5"
+      ]
+    }
+  ],
   "publisherDomain": "M365x61791022.onmicrosoft.com",
   "replyUrlsWithType": [
     {

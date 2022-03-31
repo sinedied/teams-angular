@@ -2,14 +2,9 @@
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-new": {
-      "factory": "./ng-new/index",
-      "schema": "./ng-new/schema.json",
-      "description": "Creates a new Microsoft Teams application."
-    },
-    "ng-add": {
-      "factory": "./ng-add/index",
-      "schema": "./ng-add/schema.json",
-      "description": "Adds Microsoft Teams support to an Angular project."
+      "description": "Creates a new Microsoft Teams application.",
+      "factory": "./ng-add/index#teamsApp",
+      "schema": "./ng-add/schema.json"
     }
   }
 }

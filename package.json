@@ -1,17 +1,16 @@
 {
-  "name": "@teams/angular",
-  "version": "0.0.0",
+  "name": "teams-schematics",
+  "version": "0.0.1",
   "description": "An Angular schematics collection to create Microsoft Teams applications.",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
-    "postbuild": "npm run copy:teams-app && npm run copy:ng-add",
-    "copy:teams-app": "copyfiles -u 2 \"src/teams-app/files/**\" \"lib/teams-app\"",
-    "copy:ng-add": "copyfiles -u 2 \"src/ng-add/files/**\" \"lib/ng-add\" -a",
+    "postbuild": "npm run copy:ng-add",
+    "copy:ng-add": "copyfiles -u 2 \"src/ng-add/files/**\" \"lib/ng-add\"",
     "build:watch": "npm run -s postbuild && tsc -p tsconfig.json --watch",
     "clean": "rimraf lib",
     "test": "jest src/**/*.spec.ts",
-    "test:schematics": "schematics .:teams-app test"
+    "test:schematics": "schematics .:ng-add test"
   },
   "keywords": [
     "schematics"
@@ -20,18 +19,23 @@
     {
       "name": "Yohan Lasorsa",
       "url": "https://twitter.com/sinedied"
+    },
+    {
+      "name": "Wassim Chegham",
+      "url": "https://github.com/manekinekko"
+    },
+    {
+      "name": "Waldek Mastykarz",
+      "url": "https://github.com/waldekmastykarz"
     }
   ],
   "license": "MIT",
   "schematics": "./lib/collection.json",
-  "builders": "./lib/builders.json",
   "dependencies": {
     "@angular-devkit/architect": "^0.1302.3",
     "@angular-devkit/core": "^13.1.2",
     "@angular-devkit/schematics": "^13.2.3",
-    "@pnp/cli-microsoft365": "^5.0.0-beta.30c8613",
-    "@schematics/angular": "^13.2.2",
-    "bestzip": "^2.2.0"
+    "@schematics/angular": "^13.2.2"
   },
   "devDependencies": {
     "@angular-devkit/schematics-cli": "^13.2.2",

@@ -1,180 +1,60 @@
-import { ProjectDefinition } from "@angular-devkit/core/src/workspace";
-import {
-  apply,
-  chain,
-  mergeWith,
-  move,
-  Rule,
-  SchematicContext,
-  SchematicsException,
-  template,
-  Tree,
-  url,
-} from "@angular-devkit/schematics";
-import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import {
-  addPackageJsonDependency,
-  NodeDependencyType,
-} from "@schematics/angular/utility/dependencies";
-import { getWorkspace } from "@schematics/angular/utility/workspace";
-import { randomUUID } from "crypto";
-import { EOL } from "os";
-import { posix } from "path";
+import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { addPackages, copyTemplate, mergeWithPackageJson } from '../common';
+import { SchemaOptions } from './schema';
+import { randomUUID } from 'crypto';
 
-function addDependency(
-  name: string,
-  version: string,
-  type: NodeDependencyType = NodeDependencyType.Default
-) {
-  return {
-    type,
-    name,
-    version,
-    overwrite: false,
-  };
-}
-
-function addNpmDependencies() {
-  return (tree: Tree, context: SchematicContext) => {
-    // TODO (@manekinekko): ask user if they need @microsoft/teams-js to be installed
-    addPackageJsonDependency(
-      tree,
-      addDependency("@microsoft/teams-js", "^1.11.0")
-    );
-    addPackageJsonDependency(
-      tree,
-      addDependency("@pnp/cli-microsoft365", "^4.4.0", NodeDependencyType.Dev)
-    );
-    addPackageJsonDependency(
-      tree,
-      addDependency("bestzip", "^2.2.0", NodeDependencyType.Dev)
-    );
-    addPackageJsonDependency(
-      tree,
-      addDependency("concurrently", "^7.0.0", NodeDependencyType.Dev)
-    );
-    addPackageJsonDependency(
-      tree,
-      addDependency("localtunnel", "^2.0.2", NodeDependencyType.Dev)
-    );
-
-    context.addTask(new NodePackageInstallTask());
-
-    return tree;
-  };
-}
-
-function updateGitIgnore() {
-  return (tree: Tree) => {
-    if (tree.exists(".gitignore")) {
-      let gitIgnoreContent = tree.read(".gitignore")!.toString("utf-8");
-
-      if (/^\.env$/gm.test(gitIgnoreContent)) {
-        return tree;
-      }
-
-      tree.overwrite(
-        ".gitignore",
-        [gitIgnoreContent, "# Microsoft Teams App", ".env"].join(EOL) + EOL
-      );
-    }
-
-    return tree;
-  };
-}
-
-function copyFiles(projectPath: string) {
-  return (tree: Tree) => {
-    const manifestFilepath = posix.join(
-      "src",
-      "assets",
-      "microsoft-teams",
-      "manifest.json"
-    );
-
-    if (tree.exists(manifestFilepath)) {
-      // TODO (@manekinekko): ask user if they want to overwrite the manifest.json
-      throw new SchematicsException(
-        `Found an existing Microsoft Teams manifest in the project at "${manifestFilepath}".\n` +
-          `Are you sure you want to install Microsoft Teams in this project?\n` +
-          `If you are sure, you can remove the existing file and re-run this command.`
-      );
-    }
-
-    return mergeWith(
-      apply(url("./files"), [
-        move(projectPath),
-        template({
-          // TODO (@manekinekko): figure out port resolution logic
-          port: 4200,
-          id: randomUUID(),
-          entityId: randomUUID(),
-        }),
-      ])
-    );
-  };
-}
-
-function addScriptToPackageJSON() {
-  return (tree: Tree) => {
-    if (tree.exists("package.json")) {
-      const packageJSON = JSON.parse(
-        tree.read("package.json")!.toString("utf-8")
-      );
-      packageJSON.scripts ??= {};
-
-      packageJSON.scripts[
-        "start:tunnel"
-      ] = `concurrently --kill-others "npm:tunnel" "npm:start"`;
-
-      // TODO (@manekinekko): figure out port resolution logic
-      // TODO (@manekinekko): pass --subdomain as an argument or read it from the .env file
-      (packageJSON.scripts["tunnel"] =
-        "lt --local-host localhost --port 4200 --subdomain myuniquedomain"),
-        tree.overwrite("package.json", JSON.stringify(packageJSON, null, 2));
-    }
-
-    return tree;
-  };
-}
-
-async function getHostProject(
-  tree: Tree
-): Promise<[string, ProjectDefinition]> {
-  const workspace = await getWorkspace(tree);
-  const projects = new Map(
-    [...workspace.projects.entries()].filter(
-      ([, def]) => def.extensions.projectType === "application"
-    )
-  );
-  const projectName = workspace.extensions.defaultProject?.toString();
-  if (projectName !== undefined) {
-    if (projects.has(projectName)) {
-      return [projectName, projects.get(projectName)!];
-    } else {
-      throw new SchematicsException(
-        `Microsoft Teams schematic requires a project type of "application" but the specified project "${projectName}" doesn't exist or is not of the "application" type.`
-      );
-    }
-  } else {
-    throw new SchematicsException(
-      `Microsoft Teams schematic requires a default project to be set in the workspace file.`
-    );
-  }
-}
-
-export default function (_options: any): Rule {
-  return async (tree: Tree) => {
-    const [_projectName, hostProject] = await getHostProject(tree);
-
-    let targetPath =
-      hostProject.sourceRoot ?? posix.join(hostProject.root, "src");
-
+export function teamsApp(options: SchemaOptions): Rule {
+  return async (tree: Tree, context: SchematicContext) => {
     return chain([
-      addScriptToPackageJSON(),
-      addNpmDependencies(),
-      copyFiles(targetPath),
-      updateGitIgnore(),
+      generateNewApp(options),
+      copyTemplate({
+        ...options,
+        id: randomUUID(),
+        entityId: randomUUID()
+      }),
+      addPackages(options, {
+        'dependencies': {
+          '@microsoft/teams-js': '^1.11.0',
+          '@azure/msal-angular': '^2.1.0',
+          'jwt-decode': '^3.1.2',
+          'rxjs': '^6.0.0'
+        },
+        'devDependencies': {
+          '@pnp/cli-microsoft365': '^5.0.0',
+          'bestzip': '^2.2.0',
+          'concurrently': '^7.0.0',
+          'localtunnel': '^2.0.2',
+        }
+      }),
+      mergeWithPackageJson(options, {
+        'scripts': {
+          'start:tunnel': 'concurrently --kill-others \"npm:tunnel\" \"npm:start\"',
+          'tunnel': 'lt --local-host localhost --port 4200 --subdomain myuniquedomain',
+          'update:manifest': 'node scripts/update-manifest.js myuniquedomain.loca.lt',
+          'update:teams-app': 'node scripts/update-teams-app.js',
+          'update:environment': 'node scripts/update-environment.js',
+          'm365:login': 'm365 login',
+          'm365:refresh-token': 'm365 util accesstoken get -r https://graph.microsoft.com --new',
+          'm365:create-aad-app': 'm365 aad app add --manifest @aad-app-manifest.json --uri "api://myuniquedomain.loca.lt/_appId_" --save && npm run update:environment',
+          'm365:package': 'npm run update:manifest -s && cd package && npx bestzip \"../angular-teams.zip\" \"*\"',
+          'm365:publish': 'npm run m365:package -s && m365 teams app publish -p angular-teams.zip',
+          'm365:update': 'npm run m365:package -s && npm run update:teams-app -s'
+        }
+      })
     ]);
   };
+}
+
+function generateNewApp(options: SchemaOptions): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    return externalSchematic('@schematics/angular', 'ng-new', {
+      name: options.name,
+      version: '13.2.2',
+      directory: options.name,
+      routing: true,
+      style: 'scss',
+      inlineStyle: true,
+      inlineTemplate: true
+    });
+  }
 }
