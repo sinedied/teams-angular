@@ -47,7 +47,7 @@
   "license": "MIT",
   "schematics": "./lib/collection.json",
   "dependencies": {
-    "@angular-devkit/architect": "^0.1302.3",
+    "@angular-devkit/architect": "^0.1303.1",
     "@angular-devkit/core": "^13.1.2",
     "@angular-devkit/schematics": "^13.2.3",
     "@schematics/angular": "^13.2.2"
@@ -62,7 +62,7 @@
     "semantic-release": "^19.0.2",
     "semantic-release-npm-github": "^3.0.0",
     "ts-jest": "^27.1.3",
-    "typescript": "~4.5.2"
+    "typescript": "^4.6.3"
   },
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
@@ -73,7 +73,10 @@
     "branches": "main",
     "analyzeCommits": {
       "releaseRules": [
-        { "breaking": true, "release": "minor" }
+        {
+          "breaking": true,
+          "release": "minor"
+        }
       ]
     }
   },
