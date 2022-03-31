@@ -1,6 +1,6 @@
 {
   "name": "teams-angular",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Angular schematics to create Microsoft Teams applications.",
   "scripts": {
     "prepare": "npm run build",
