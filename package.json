@@ -76,6 +76,10 @@
         {
           "breaking": true,
           "release": "minor"
+        },
+        {
+          "type": "docs",
+          "release": "patch"
         }
       ]
     }
