@@ -3,8 +3,8 @@
   "schematics": {
     "ng-new": {
       "description": "Creates a new Microsoft Teams application.",
-      "factory": "./ng-add/index#teamsApp",
-      "schema": "./ng-add/schema.json"
+      "factory": "./ng-new/index#teamsApp",
+      "schema": "./ng-new/schema.json"
     }
   }
 }
