@@ -1,7 +1,5 @@
 {
-  "name": "teams-schematics",
-  "version": "0.0.1",
-  "description": "An Angular schematics collection to create Microsoft Teams applications.",
+  "name": "teams-angular",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
