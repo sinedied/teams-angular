@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Angular schematics to create Microsoft Teams applications.",
   "scripts": {
+    "prepare": "npm run build",
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
     "postbuild": "npm run copy:ng-new",
