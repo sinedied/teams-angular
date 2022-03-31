@@ -9,7 +9,7 @@
 
 ## Usage
 
-### `ng new teams-angular`
+### `ng new`
 
 This package provides a schematic that creates a new Angular app configured to be deployed as a Microsoft Teams app. The generated app includes:
 
@@ -17,9 +17,10 @@ This package provides a schematic that creates a new Angular app configured to b
 - Single-Sign On (SSO) configuration with Microsoft Teams,
 - additional npm scripts to create Azure AD application and manage the Teams app package
 
-To use this schematic, run:
+To use this schematic, make sure you have `@angular/cli` installed and run:
 
 ```sh
+npm install -g teams-angular
 ng new teams-app --collection teams-angular
 ```
 
