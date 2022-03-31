@@ -2,7 +2,7 @@ import { chain, externalSchematic, Rule, SchematicContext, Tree } from '@angular
 import { addPackages, copyTemplate, mergeWithPackageJson } from '../common';
 import { SchemaOptions } from './schema';
 
-export function teamsApp(options: SchemaOptions): Rule {
+export default function teamsApp(options: SchemaOptions): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     // const projectRoot = await getProjectRoot(tree, options);
     // options.path = join(projectRoot, 'src');

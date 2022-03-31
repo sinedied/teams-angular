@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "teams-app",
+  "$id": "new-teams-app",
   "title": "Teams application schematics",
   "description": "Initializes a new Teams application",
   "additionalProperties": false,
