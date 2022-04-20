@@ -28,12 +28,12 @@ ng new teams-app --collection teams-angular
 
 When you are ready to deploy your app to production, there are two main steps needed to make your app available to the public: first you need to deploy your web app on a server, and then you need to publish the app to your production tenant.
 
-### Step 1: Deploying your web app
+#### Step 1: Deploying your web app
 
 1. Build app for production in `dist/` folder using `npm run build`.
 2. Deploy the built app to your favorite cloud provider. See [instructions below](#Deploying-Angular-app-to-to-Azure-Static-Web-Apps) for deploying to [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/?WT.mc_id=javascript-0000-cxa) for example.
 
-### Step 2: Deploying your Teams app
+#### Step 2: Deploying your Teams app
 
 1. Set your production URL with `node scripts/update-manifest.js <production_url>`
 1. Login to CLI for Microsoft 365 onto the production tenant: `npm run m365:login`
