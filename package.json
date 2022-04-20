@@ -7,7 +7,7 @@
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
     "postbuild": "npm run copy:ng-new",
-    "copy:ng-new": "copyfiles -u 2 \"src/ng-new/files/**\" \"lib/ng-new\"",
+    "copy:ng-new": "copyfiles -a -u 2 \"src/ng-new/files/**\" \"lib/ng-new\"",
     "build:watch": "npm run -s postbuild && tsc -p tsconfig.json --watch",
     "clean": "rimraf lib",
     "test": "jest src/**/*.spec.ts",
