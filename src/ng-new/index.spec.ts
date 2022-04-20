@@ -57,6 +57,8 @@ Array [
   "/test/src/app/login/login.component.html",
   "/test/src/app/login/login.component.spec.ts",
   "/test/src/app/login/login.component.ts",
+  "/test/.devcontainer/Dockerfile",
+  "/test/.devcontainer/devcontainer.json",
   "/test/package/color.png",
   "/test/package/manifest.json",
   "/test/package/outline.png",
