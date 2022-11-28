@@ -12,15 +12,13 @@ describe('ng-new', () => {
       .toPromise();
 
     expect(tree.files).toMatchInlineSnapshot(`
-Array [
+[
   "/test/README.md",
   "/test/.editorconfig",
   "/test/.gitignore",
   "/test/angular.json",
   "/test/package.json",
   "/test/tsconfig.json",
-  "/test/.browserslistrc",
-  "/test/karma.conf.js",
   "/test/tsconfig.app.json",
   "/test/tsconfig.spec.json",
   "/test/aad-app-manifest.json",
@@ -30,13 +28,9 @@ Array [
   "/test/src/favicon.ico",
   "/test/src/index.html",
   "/test/src/main.ts",
-  "/test/src/polyfills.ts",
   "/test/src/styles.scss",
-  "/test/src/test.ts",
   "/test/src/assets/.gitkeep",
   "/test/src/assets/images/signin_light.svg",
-  "/test/src/environments/environment.prod.ts",
-  "/test/src/environments/environment.ts",
   "/test/src/app/app-routing.module.ts",
   "/test/src/app/app.module.ts",
   "/test/src/app/app.component.spec.ts",
@@ -57,6 +51,8 @@ Array [
   "/test/src/app/login/login.component.html",
   "/test/src/app/login/login.component.spec.ts",
   "/test/src/app/login/login.component.ts",
+  "/test/src/environments/environment.prod.ts",
+  "/test/src/environments/environment.ts",
   "/test/.devcontainer/Dockerfile",
   "/test/.devcontainer/devcontainer.json",
   "/test/package/color.png",
