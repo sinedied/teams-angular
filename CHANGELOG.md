@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/sinedied/teams-angular/compare/0.2.0...0.3.0) (2022-11-28)
+
+
+### Features
+
+* update schematics for Angular 15 ([b870dc2](https://github.com/sinedied/teams-angular/commit/b870dc277b6e20212b61f0c85097381716fea80a))
+
 # [0.2.0](https://github.com/sinedied/teams-angular/compare/0.1.1...0.2.0) (2022-04-20)
 
 
