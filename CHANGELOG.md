@@ -1,3 +1,15 @@
+# [0.4.0](https://github.com/sinedied/teams-angular/compare/0.3.0...0.4.0) (2023-04-07)
+
+
+### chore
+
+* bump minimum node version ([b94778a](https://github.com/sinedied/teams-angular/commit/b94778ae39175e28f485449c37145bf002682694))
+
+
+### BREAKING CHANGES
+
+* requires Node.js >= 16
+
 # [0.3.0](https://github.com/sinedied/teams-angular/compare/0.2.0...0.3.0) (2022-11-28)
 
 
