@@ -24,6 +24,14 @@ npm install -g teams-angular
 ng new teams-app --collection teams-angular
 ```
 
+> Note: if you get an error like `An unhandled exception occurred: Collection "teams-angular" cannot be resolved.`, it may be related to your NPM installation. Here are a few commands that you can try to fix the issue:
+> ```sh
+> npm uninstall -g @angular/cli teams-angular
+> npm cache clean --force
+> npm install -g npm@latest
+> npm install -g @angular/cli teams-angular
+> ```
+
 ## Deploying to production
 
 When you are ready to deploy your app to production, there are two main steps needed to make your app available to the public: first you need to deploy your web app on a server, and then you need to publish the app to your production tenant.
